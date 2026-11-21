@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+ <html lang="en-US">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard | Hospital Management System</title>
+    <link rel="stylesheet" href="patient.css">
+ </head>
+ <body>
+    <header class="header">
+      <a href="index.html" class="logo">Hospital Management System</a>
+      <div class="user-info">
+        <span class="badge patient">Patient</span>
+        <span>Welcome!</span>
+        <a href="index.html" class="btn btn-small btn-light">Logout</a>
+      </div>
+    </header>
+
+    <nav class="topnav">
+        <button type="button" id="nav-book-appointment" >Book Appointment </button> 
+        <button type="button" id="nav-view-schedule">View Schedule</button>
+        <button type="button" id="nav-view-prescriptions">View Prescriptions</button>
+        <button type="button" id="nav-view-test-report">Test Reports</button>
+        <button type = "button" id="nav-view-bills">View Bills</button>
+    </nav>
+
+    <img id="main-img" src="https://media.istockphoto.com/id/2226664352/photo/senior-woman-in-hospital-bed.jpg?s=612x612&w=0&k=20&c=jzq5aT_etfR-KCUINUQ75t5v-mez5IQ-9T_1ydrval0=" alt="Image of patient.">
+    <main id ="patient-main-content">
+        <section id ="book-appointment-section">
+            <h2 class="page-title">Book Appointment</h2>
+            <form method="post">
+                <fieldset>
+                    <legend>Appointment Details</legend>
+                    <label for="department">Select Department:</label>
+                    <select id="department" name="department" required>
+                        <option value="">Select Department</option>
+                    </select>
+                    <label for="doctor">Select Doctor:</label>
+                    <select id="doctor" name="doctor" required>
+                        <option value="">Select Doctor</option>
+                    </select>
+                    <label for="appointment-date">Select Date:</label>
+                    <input type="date" id="appointment-date" name="appointment-date" required>
+
+                     <label for="appointment-time">Select Time:</label>
+                     <select id="appointment-time" name="appointment-time" required>
+                        <option value="">Select Time</option>
+                        </select>
+                    <label for="reason">Reason for Appointment:</label>
+                    <textarea id="reason" name="reason" rows="4" required></textarea>
+                    <br>
+                    <button class="submit-button"   type="submit" >Book Appointment</button>
+                </fieldset>
+            </form>
+        </section>
+
+        <section id="view-schedule-section">
+            <h2 class="page-title">View Schedule</h2>
+
+             <div class="table-wrapper">
+                <table class="data-table">
+                  <tr><td>Department Name:</td></tr>
+                    <tr><td>Doctor Name:</td></tr>
+                    <tr><td>Date:</td></tr>
+                    <tr><td>Time:</td></tr>
+                    <tr><td>Room No:</td></tr>
+                </table>
+             </div>
+        </section>
+
+        <section id="prescription-section">
+            <h2>Medical Prescription</h2>
+             <div class="table-wrapper">
+                <table class="data-table">
+                    <tr><td>
+                        <h3>Patient Information:</h3>
+                        <p>Patient Name:</p>
+                        <p>Prescription Id:</p>
+                        <p>Age:</p>
+                        <p>Date:</p>
+                    </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Doctor Information:</h3> 
+                            <p>Doctor Name:</p>
+                            <p>Department:</p>
+                        </td>
+                    </tr>
+                   <tr>
+                    <td>
+                     <h3>Medicine Details:</h3>
+                     <p>Medicine:</p>
+                     <p>Dosage:</p>
+                     <p>Duration:</p>
+                    
+                   </td>
+                 </tr> 
+                </table>       
+             </div>
+        </section>
+
+        <section id="test-report-section">
+            <h2>Test Report</h2>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <tr><td>
+                        <h3>Report Information</h3>
+                        <p>Report Id:</p>
+                        <p>Test Name:</p>
+                        <p>Test Date:</p>
+                        <p>Doctor Name:</p>
+                        <p>Report Status:</p>
+                    </td></tr>
+                     <tr>
+                        <td>
+                            <h3>Test Results:</h3>
+                            <p>Test Paramenter:</p>
+                            <p>Test Result:</p>
+                            <p>Normal Range:</p>
+                        </td>
+                     </tr>
+
+                     <tr>
+                        <td><h3>Doctor Remarks:</h3></td>
+                     </tr>
+                </table>
+            </div>
+            <br>
+             <button class="download-btn">Download Prescription</button>
+        </section>
+
+        <section id="view-bill-section">
+            <h2>View Bill</h2>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <tr><td>Consulation Fee:</td></tr>
+                    <tr><td>Medicine Cost:</td></tr>
+                    <tr><td>Test charge:</td></tr>
+                    <tr><td>Other charge:</td></tr>
+                    <tr><td>Total Cost:</td></tr>
+                    <tr><td>Discount:</td></tr>
+                    <tr><th>Payable Cost:</th></tr>
+                </table>
+            </div>
+            <br>
+            <label for="payment">Payment Method</label>
+            <select id="payment" name="payment-method">
+                <option>Select</option>
+                <option>Bkash</option>
+                <option>Nagad</option>
+                <option>Cash</option>
+            </select>
+            <button class="payment-btn">Pay Bill</button>
+        </section>
+
+ </main>
+ </body>
+ </html>
