@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Portal - Hospital Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h1>HMS <span>Doctor</span></h1>
+    <nav id="menu">
+      <button class="menu-btn active" data-target="dashboard">Dashboard</button>
+      <button class="menu-btn" data-target="patients">My Patients</button>
+      <button class="menu-btn" data-target="prescribe">Write Prescription</button>
+      <button class="menu-btn" data-target="tests">Suggest Tests</button>
+      <button class="menu-btn" data-target="doctors">Doctors Directory</button>
+    </nav>
+    <div class="portal-links">
+      <p>Other portals</p>
+      <a href="../admin/index.html">Admin portal</a>
+      <a href="../nurse/index.html">Nurse portal</a>
+      <a href="../patient/index.html">Patient portal</a>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <h2 id="page-title">Dashboard</h2>
+      <div class="user">Dr. Rahman &middot; Cardiology</div>
+    </header>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page">
+      <div class="cards">
+        <div class="card"><h3 id="count-patients">0</h3><p>Assigned patients</p></div>
+        <div class="card"><h3 id="count-prescriptions">0</h3><p>Prescriptions sent</p></div>
+        <div class="card"><h3 id="count-tests">0</h3><p>Test requests</p></div>
+        <div class="card"><h3 id="count-doctors">0</h3><p>Doctors in hospital</p></div>
+      </div>
+      <h3>Recent activity</h3>
+      <ul id="activity" class="list"></ul>
+    </section>
+
+    <!-- PATIENTS -->
+    <section id="patients" class="page hidden">
+      <input type="text" id="patient-search" placeholder="Search patient by name or ID...">
+      <table>
+        <thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Condition</th><th>Actions</th></tr></thead>
+        <tbody id="patient-table"></tbody>
+      </table>
+    </section>
+
+    <!-- PRESCRIPTION FORM -->
+    <section id="prescribe" class="page hidden">
+      <form id="prescription-form" action="/api/doctor/prescriptions" method="post">
+        <div class="row">
+          <label>Patient
+            <select id="rx-patient" name="patient" required></select>
+          </label>
+          <label>Diagnosis
+            <input type="text" id="rx-diagnosis" name="diagnosis" placeholder="e.g. Hypertension" required>
+          </label>
+        </div>
+
+        <h3>Medicines</h3>
+        <div id="medicine-list"></div>
+        <button type="button" id="add-medicine" class="btn secondary">+ Add another medicine</button>
+
+        <label>Advice / notes
+          <textarea id="rx-notes" name="notes" rows="3" placeholder="Diet, rest, follow-up date..."></textarea>
+        </label>
+
+        <button type="submit" class="btn">Send to patient portal</button>
+      </form>
+
+      <h3>Prescriptions sent</h3>
+      <div id="prescription-list"></div>
+    </section>
+
+    <!-- TESTS FORM -->
+    <section id="tests" class="page hidden">
+      <form id="test-form" action="/api/doctor/test-requests" method="post">
+        <label>Patient
+          <select id="test-patient" name="patient" required></select>
+        </label>
+
+        <fieldset>
+          <legend>Select one or more tests</legend>
+          <div id="test-options" class="checks"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Urgency</legend>
+          <label class="inline"><input type="radio" name="urgency" value="Routine" checked> Routine</label>
+          <label class="inline"><input type="radio" name="urgency" value="Urgent"> Urgent</label>
+          <label class="inline"><input type="radio" name="urgency" value="Emergency"> Emergency</label>
+        </fieldset>
+
+        <label>Notes for lab / nurse
+          <textarea id="test-notes" name="notes" rows="3"></textarea>
+        </label>
+
+        <button type="submit" class="btn">Send test request</button>
+      </form>
+
+      <h3>Test requests</h3>
+      <div id="test-list"></div>
+    </section>
+
+    <!-- DOCTORS DIRECTORY -->
+    <section id="doctors" class="page hidden">
+      <p class="hint">This list is managed by the admin. Doctors can view it but not edit it.</p>
+      <select id="dept-filter"></select>
+      <table>
+        <thead><tr><th>Name</th><th>Department</th><th>Contact</th><th>Status</th></tr></thead>
+        <tbody id="doctor-table"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
