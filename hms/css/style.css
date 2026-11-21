@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+}
+
+/* header and navigation */
+header {
+  position: sticky;
+  top: 0;
+  background-color: #1b5e20;
+  color: white;
+  padding: 10px;
+}
+nav a {
+  display: inline-block;
+  padding: 10px 16px;
+  color: white;
+  text-decoration: none;
+}
+nav a:hover { background-color: #2e7d32; }
+
+main { padding: 10px; }
+section { margin-bottom: 30px; }
+
+/* summary boxes */
+.box {
+  display: inline-block;
+  width: 150px;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* forms */
+form {
+  max-width: 400px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.login { margin: 40px auto; }          /* login form is centred */
+label { display: block; }
+input[type="radio"] + label { display: inline; }
+input[type="text"], input[type="tel"], input[type="number"], input[type="email"],
+input[type="password"], select, textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+.error { color: red; font-size: 12px; display: block; }
+button { margin-top: 10px; cursor: pointer; }
+
+/* tables */
+table { border-collapse: collapse; width: 100%; background-color: white; }
+th, td { border: 1px solid #999; padding: 6px; text-align: left; }
+th { background-color: #1b5e20; color: white; }
+tr:nth-child(even) { background-color: #f2f2f2; }
+
+footer { padding: 10px; background-color: #ddd; text-align: center; }
+
+@media (max-width: 600px) {
+  form { padding: 10px; }
+  .box { width: 100%; box-sizing: border-box; margin: 5px 0; }
+}
