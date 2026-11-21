@@ -1,0 +1,121 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Segoe UI", Arial, sans-serif;  /* ends with a generic family */
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgb(52, 51, 51);
+  background-color:rgb(244, 239, 233);
+}
+.header {
+  background-color:rgb(78, 117, 131);
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+#main-img{
+  width: 100%;
+  height: auto;
+}
+.logo{
+  font-size:larger;
+  font-weight: bold;
+}
+.logo,.btn-small {
+   text-decoration: none;
+   color: white;
+   font-weight: blod;
+}
+.btn-small:hover{
+  background-color:beige;
+  color: black;
+  cursor: pointer;
+}
+.topnav button{
+  padding:5px;
+  background-color: antiquewhite;
+}
+#book-appointment-section {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+#book-appointment-section label{
+  display: block;
+}
+#book-appointment-section input, #book-appointment-section select{
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.submit-button{
+  background-color:rgb(73, 152, 212) ;
+  color: white;
+  padding: 5px;
+  border-style:solid;
+  border-radius: 5px;
+}
+.submit-button:hover{
+  background-color: white;
+  color:rgb(73, 152, 212) ;
+}
+
+#view-schedule-section{
+  text-align: center;
+  height: 550px;
+}
+.table-wrapper{
+  display: flex;
+  justify-content: center;
+}
+.data-table {
+    width: 70%;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color:rgb(249, 251, 252);
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid black;
+    padding: 15px;
+    text-align: left;
+}
+
+.data-table th {
+    width: 40%;
+}
+#prescription-section{
+     text-align: center;
+     height: 550px;
+}
+
+#test-report-section{
+  text-align: center;
+  height: 550px;
+}
+.download-btn{
+  padding: 5px;
+  border: 2px solid none;
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(85, 159, 85);
+}
+#view-bill-section{
+  text-align:center;
+  height: 550px;
+}
+.payment-btn{
+  padding: 5px;
+  border: 2px solid none;
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(85, 159, 85);
+}
