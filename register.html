@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMS Register</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Hospital Management System</h1>
+  </header>
+
+  <main>
+    <form id="registerForm" class="login" onsubmit="return validateRegister()">
+      <h2>Create an Account</h2>
+
+      <label for="regType">I am a</label>
+      <select id="regType" onchange="showTypeFields()">
+        <option value="">-- Select --</option>
+        <option value="doctor">Doctor</option>
+        <option value="nurse">Nurse</option>
+        <option value="patient">Patient</option>
+      </select>
+      <span class="error" id="regTypeErr"></span>
+
+      <label for="regName">Full Name</label>
+      <input type="text" id="regName">
+      <span class="error" id="regNameErr"></span>
+
+      <label for="regEmail">Email</label>
+      <input type="email" id="regEmail">
+      <span class="error" id="regEmailErr"></span>
+
+      <label for="regPhone">Phone</label>
+      <input type="tel" id="regPhone">
+      <span class="error" id="regPhoneErr"></span>
+
+      <label for="regPass">Password</label>
+      <input type="password" id="regPass">
+      <span class="error" id="regPassErr"></span>
+
+      <label for="regConfirm">Confirm Password</label>
+      <input type="password" id="regConfirm">
+      <span class="error" id="regConfirmErr"></span>
+
+      <!-- only the fieldset of the chosen type is shown -->
+      <fieldset id="regDoctorFields">
+        <legend>Doctor details</legend>
+        <label for="regDept">Department</label>
+        <select id="regDept"><option value="">-- Select --</option></select>
+        <span class="error" id="regDeptErr"></span>
+      </fieldset>
+
+      <fieldset id="regNurseFields">
+        <legend>Nurse details</legend>
+        <label for="regWard">Ward</label>
+        <select id="regWard"><option value="">-- Select --</option></select>
+        <span class="error" id="regWardErr"></span>
+      </fieldset>
+
+      <fieldset id="regPatientFields">
+        <legend>Patient details</legend>
+        <label for="regAge">Age</label>
+        <input type="number" id="regAge" min="1" max="120">
+        <span class="error" id="regAgeErr"></span>
+
+        <p>Gender</p>
+        <input type="radio" id="regMale" name="regGender" value="Male">
+        <label for="regMale">Male</label>
+        <input type="radio" id="regFemale" name="regGender" value="Female">
+        <label for="regFemale">Female</label>
+        <span class="error" id="regGenderErr"></span>
+
+        <label for="regProblem">Problem</label>
+        <textarea id="regProblem" rows="3"></textarea>
+      </fieldset>
+
+      <input type="checkbox" id="terms" onchange="toggleRegister()">
+      <label for="terms">I agree to the terms</label>
+
+      <button type="submit" id="registerBtn" disabled>Register</button>
+      <button type="reset">Reset</button>
+      <p id="regMsg"></p>
+
+      <p>Already have an account? <a href="index.html">Login</a></p>
+    </form>
+  </main>
+
+  <footer>&copy; 2026 Hospital Management System</footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>

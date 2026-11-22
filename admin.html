@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMS Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Hospital Management System: Admin</h1>
+    <nav>
+      <button onclick="showSection('users')">Manage Users</button>
+      <button onclick="showSection('stats')">Statistics</button>
+      <button onclick="showSection('rules')">Hospital Rules</button>
+      <button onclick="showSection('log')">Activity Log</button>
+      <a href="index.html">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ================= MANAGE USERS (Create, Read, Update, Delete, Search) ================= -->
+    <section id="users" class="panel">
+      <h2>Manage Users</h2>
+
+      <form id="userForm" onsubmit="return saveUser()">
+        <h3 id="formTitle">Add a user</h3>
+
+        <label for="uRole">Role</label>
+        <select id="uRole" onchange="showRoleFields()">
+          <option value="">-- Select --</option>
+          <option value="admin">Admin</option>
+          <option value="doctor">Doctor</option>
+          <option value="nurse">Nurse</option>
+          <option value="patient">Patient</option>
+        </select>
+        <span class="error" id="uRoleErr"></span>
+
+        <label for="uName">Name</label>
+        <input type="text" id="uName">
+        <span class="error" id="uNameErr"></span>
+
+        <label for="uEmail">Email</label>
+        <input type="email" id="uEmail">
+        <span class="error" id="uEmailErr"></span>
+
+        <label for="uPass">Password</label>
+        <input type="password" id="uPass">
+        <span class="error" id="uPassErr"></span>
+
+        <label for="uPhone">Phone</label>
+        <input type="tel" id="uPhone">
+        <span class="error" id="uPhoneErr"></span>
+
+        <!-- only the fieldset of the chosen role is shown -->
+        <fieldset id="doctorFields">
+          <legend>Doctor details</legend>
+          <label for="uDept">Department</label>
+          <select id="uDept"><option value="">-- Select --</option></select>
+          <span class="error" id="uDeptErr"></span>
+        </fieldset>
+
+        <fieldset id="nurseFields">
+          <legend>Nurse details</legend>
+          <label for="uWard">Ward</label>
+          <select id="uWard"><option value="">-- Select --</option></select>
+          <span class="error" id="uWardErr"></span>
+        </fieldset>
+
+        <fieldset id="patientFields">
+          <legend>Patient details</legend>
+          <label for="uAge">Age</label>
+          <input type="number" id="uAge" min="1" max="120">
+          <span class="error" id="uAgeErr"></span>
+
+          <p>Gender</p>
+          <input type="radio" id="uMale" name="gender" value="Male">
+          <label for="uMale">Male</label>
+          <input type="radio" id="uFemale" name="gender" value="Female">
+          <label for="uFemale">Female</label>
+          <span class="error" id="uGenderErr"></span>
+
+          <label for="uProblem">Problem</label>
+          <textarea id="uProblem" rows="3"></textarea>
+        </fieldset>
+
+        <button type="submit" id="saveBtn">Add User</button>
+        <button type="button" id="cancelBtn" onclick="resetUserForm()">Cancel</button>
+        <span id="userMsg"></span>
+      </form>
+
+      <h3>All Users</h3>
+      <div class="toolbar">
+        <input type="text" id="userSearch" placeholder="Search by name, email, phone or role" onkeyup="showUsers()">
+        <select id="roleFilter" onchange="showUsers()">
+          <option value="all">All roles</option>
+          <option value="admin">Admins</option>
+          <option value="doctor">Doctors</option>
+          <option value="nurse">Nurses</option>
+          <option value="patient">Patients</option>
+        </select>
+      </div>
+      <p id="userCount"></p>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>Role</th><th>Name</th><th>Email</th><th>Phone</th><th>Details</th><th>Action</th></tr>
+          </thead>
+          <tbody id="userBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= UNIQUE FEATURE 1: STATISTICS REPORT ================= -->
+    <section id="stats" class="panel">
+      <h2>Statistics Report</h2>
+      <div class="box">Total users<br><b id="statTotal"></b></div>
+      <div class="box">Admins<br><b id="statAdmins"></b></div>
+      <div class="box">Doctors<br><b id="statDoctors"></b></div>
+      <div class="box">Nurses<br><b id="statNurses"></b></div>
+      <div class="box">Patients<br><b id="statPatients"></b></div>
+
+      <h3>Doctors by department</h3>
+      <div id="deptChart"></div>
+
+      <h3>Nurses by ward</h3>
+      <div id="wardChart"></div>
+    </section>
+
+    <!-- ================= UNIQUE FEATURE 2: HOSPITAL RULES ================= -->
+    <section id="rules" class="panel">
+      <h2>Hospital Rules</h2>
+      <form id="rulesForm" onsubmit="return saveRules()">
+        <label for="rFee">Consultation fee (Tk)</label>
+        <input type="number" id="rFee" onkeyup="showPreview()">
+        <span class="error" id="rFeeErr"></span>
+
+        <label for="rMax">Most patients per doctor per day</label>
+        <input type="number" id="rMax" onkeyup="showPreview()">
+        <span class="error" id="rMaxErr"></span>
+
+        <label for="rStart">Visiting hours start</label>
+        <input type="time" id="rStart" onchange="showPreview()">
+
+        <label for="rEnd">Visiting hours end</label>
+        <input type="time" id="rEnd" onchange="showPreview()">
+        <span class="error" id="rTimeErr"></span>
+
+        <label for="rVisitors">Visitors allowed per patient</label>
+        <select id="rVisitors" onchange="showPreview()"></select>
+
+        <button type="submit">Save Rules</button>
+        <span id="ruleMsg"></span>
+      </form>
+
+      <h3>Live preview</h3>
+      <div id="rulePreview" class="preview"></div>
+    </section>
+
+    <!-- ================= UNIQUE FEATURE 3: ACTIVITY LOG ================= -->
+    <section id="log" class="panel">
+      <h2>Activity Log</h2>
+      <div class="toolbar">
+        <select id="logFilter" onchange="showLog()">
+          <option value="all">All types</option>
+          <option value="Added">Added</option>
+          <option value="Updated">Updated</option>
+          <option value="Deleted">Deleted</option>
+          <option value="Settings">Settings</option>
+        </select>
+        <button onclick="clearLog()">Clear Log</button>
+      </div>
+      <p id="logCount"></p>
+      <div id="logBoard" class="board"></div>
+    </section>
+
+  </main>
+
+  <footer>&copy; 2026 Hospital Management System</footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
