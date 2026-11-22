@@ -14,20 +14,26 @@
         <span>Welcome!</span>
         <a href="index.html" class="btn btn-small btn-light">Logout</a>
       </div>
-    </header>
-
-    <nav class="topnav">
+       <nav class="topnav">
         <button type="button" id="nav-book-appointment" >Book Appointment </button> 
         <button type="button" id="nav-view-schedule">View Schedule</button>
         <button type="button" id="nav-view-prescriptions">View Prescriptions</button>
         <button type="button" id="nav-view-test-report">Test Reports</button>
         <button type = "button" id="nav-view-bills">View Bills</button>
     </nav>
-
-    <img id="main-img" src="https://media.istockphoto.com/id/2226664352/photo/senior-woman-in-hospital-bed.jpg?s=612x612&w=0&k=20&c=jzq5aT_etfR-KCUINUQ75t5v-mez5IQ-9T_1ydrval0=" alt="Image of patient.">
+      <div>
+         <div class="profileAndsearch">
+            <input id="search-input" type="search" placeholder="search by doctor name">
+             <button type="button" id="search-btn">search</button>
+            <img id="profile-pic" src= "images/account.png" alt="profile picture">view profile</div>
+    </div>
+      </div>
+    <div>
+    </header>
+    <img id="main-img" src="/images/patientPhoto.jpg" alt="patient photo">
     <main id ="patient-main-content">
         <section id ="book-appointment-section">
-            <h2 class="page-title">Book Appointment</h2>
+            <h2 class="page-title" id="book-appointment-title">Book Appointment</h2>
             <form method="post">
                 <fieldset>
                     <legend>Appointment Details</legend>
@@ -47,16 +53,15 @@
                         <option value="">Select Time</option>
                         </select>
                     <label for="reason">Reason for Appointment:</label>
-                    <textarea id="reason" name="reason" rows="4" required></textarea>
+                    <textarea id="reason" name="reason" rows="04 rows"></textarea>
                     <br>
                     <button class="submit-button"   type="submit" >Book Appointment</button>
                 </fieldset>
             </form>
         </section>
-
+          
         <section id="view-schedule-section">
-            <h2 class="page-title">View Schedule</h2>
-
+             <h2><span class="page-title2">View Schedule</span></h2>
              <div class="table-wrapper">
                 <table class="data-table">
                   <tr><td>Department Name:</td></tr>
@@ -66,10 +71,15 @@
                     <tr><td>Room No:</td></tr>
                 </table>
              </div>
+             <div class="situation"> 
+             <span id="conformation" class="situationtype">Confirmed</span>
+             <span id="pending" class="situationtype">Pending</span>
+             <span id="rejection" class="situationtype">Rejected</span>
+            </div>
         </section>
 
         <section id="prescription-section">
-            <h2>Medical Prescription</h2>
+             <h2><span class="page-title3">Prescription</span></h2>
              <div class="table-wrapper">
                 <table class="data-table">
                     <tr><td>
@@ -98,10 +108,11 @@
                  </tr> 
                 </table>       
              </div>
+             <button class="download-btn">Download Prescription</button>
         </section>
 
         <section id="test-report-section">
-            <h2>Test Report</h2>
+             <h2><span class="page-title4">Test Report</span></h2>
             <div class="table-wrapper">
                 <table class="data-table">
                     <tr><td>
@@ -126,12 +137,11 @@
                      </tr>
                 </table>
             </div>
-            <br>
-             <button class="download-btn">Download Prescription</button>
+            <button class="download-btn">Download Report</button>
         </section>
 
         <section id="view-bill-section">
-            <h2>View Bill</h2>
+            <h2><span class="page-title5">View Bill</span></h2>
             <div class="table-wrapper">
                 <table class="data-table">
                     <tr><td>Consulation Fee:</td></tr>
@@ -147,13 +157,11 @@
             <label for="payment">Payment Method</label>
             <select id="payment" name="payment-method">
                 <option>Select</option>
-                <option>Bkash</option>
-                <option>Nagad</option>
-                <option>Cash</option>
             </select>
             <button class="payment-btn">Pay Bill</button>
         </section>
 
  </main>
+   <script src="patient.js"></script>
  </body>
  </html>
