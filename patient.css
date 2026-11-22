@@ -37,16 +37,56 @@ body {
 .topnav button{
   padding:5px;
   background-color: antiquewhite;
+  border:3px solid none;
+  border-radius: 6px;
+}
+.topnav{
+  display: flex;
+  justify-content: flex-start;
+  gap:10px;
+  margin-left: 3px;
+}
+#profile-pic{
+   width: 20px;
+}
+.profileAndsearch{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  gap: 10px;
+}
+#search-btn{
+  background-color: beige;
+  color: black;
+  padding: 3px;
+}
+#search-btn:hover{
+  background-color: black;
+  color: beige;
+  cursor: pointer;
+}
+#search-input{
+  padding: 3px;
+}
+.profile-btn{
+  padding: 5px;
 }
 #book-appointment-section {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
   background-color: #f9f9f9;
+  border: 5px solid  rgb(78, 117, 131);
   border-radius: 8px;
 }
 #book-appointment-section label{
   display: block;
+  margin-left: 7px;
+  margin-right: 7px;
+  font-weight: bold;
 }
 #book-appointment-section input, #book-appointment-section select{
   width: 100%;
@@ -55,21 +95,59 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+#book-appointment-title{
+   background-color:rgb(78, 117, 131);
+   color: white;
+   border: 2px solid none;
+   border-radius: 5px;
+   padding: 3px;
+}
 .submit-button{
   background-color:rgb(73, 152, 212) ;
   color: white;
   padding: 5px;
-  border-style:solid;
+  border:2px solid none;
   border-radius: 5px;
+  margin-bottom: 10px;
+  margin-left: 7px;
 }
 .submit-button:hover{
   background-color: white;
   color:rgb(73, 152, 212) ;
 }
 
+.page-title2{
+  background-color:rgb(78, 117, 131) ;
+  color: white;
+  padding: 0px 360px 0px 360px;
+  border: 2px solid none;
+  border-radius: 5px;
+}
+.page-title3{
+  background-color:rgb(78, 117, 131) ;
+  color: white;
+  padding: 0px 375px 0px 375px;
+  border: 2px solid none;
+  border-radius: 5px;
+}
+.page-title4{
+  background-color:rgb(78, 117, 131) ;
+  color: white;
+  padding: 0px 375px 0px 375px;
+  border: 2px solid none;
+  border-radius: 5px;
+}
+.page-title5{
+  background-color:rgb(78, 117, 131) ;
+  color: white;
+  padding: 0px 390px 0px 390px;
+  border: 2px solid none;
+  border-radius: 5px;
+}
 #view-schedule-section{
   text-align: center;
-  height: 550px;
+  height: 650px;
 }
 .table-wrapper{
   display: flex;
@@ -84,6 +162,7 @@ body {
 
 .data-table th,
 .data-table td {
+    font-weight: bold;
     border: 1px solid black;
     padding: 15px;
     text-align: left;
@@ -92,16 +171,42 @@ body {
 .data-table th {
     width: 40%;
 }
+.situation{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  gap: 20px;
+  margin-top: 20px;
+}
+#conformation{
+  background-color: green;
+  color: white;
+}
+#pending{
+  background-color: yellow;
+  color: black;
+}
+#rejection{
+  background-color: red;
+  color:white;
+}
+.situationtype{
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 4px;
+
+}
 #prescription-section{
      text-align: center;
-     height: 550px;
+     height: 650px;
 }
 
 #test-report-section{
   text-align: center;
-  height: 550px;
+  height: 650px;
 }
 .download-btn{
+  margin-top: 10px;
   padding: 5px;
   border: 2px solid none;
   border-radius: 3px;
@@ -110,7 +215,7 @@ body {
 }
 #view-bill-section{
   text-align:center;
-  height: 550px;
+  height: 650px;
 }
 .payment-btn{
   padding: 5px;
@@ -118,4 +223,12 @@ body {
   border-radius: 3px;
   color: white;
   background-color: rgb(85, 159, 85);
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+section{
+  scroll-margin-top: 20px;
 }
