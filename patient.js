@@ -1,3 +1,4 @@
+
 const sections = [
     "book-appointment-section",
     "view-schedule-section",
@@ -6,18 +7,102 @@ const sections = [
     "view-bill-section"
 ];
 
-let appointments = [];
+let appointmentFields = ["department", "doctor", "appointment-date", "appointment-time"];
 
-function showSection(sectionId) {
-    let section = document.getElementById(sectionId);
+let availableTimes = [
+    "09:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "02:00 PM",
+    "03:00 PM",
+    "04:00 PM",
+    "05:00 PM"
+];
 
-    if (section) {
-        section.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+
+function showError(fieldId, message) {
+    let errorId;
+
+    switch (fieldId) {
+        case "department":
+            errorId = "departmentError";
+            break;
+
+        case "doctor":
+            errorId = "doctorError";
+            break;
+
+        case "appointment-date":
+            errorId = "dateError";
+            break;
+
+        case "appointment-time":
+            errorId = "timeError";
+            break;
+    }
+
+    document.getElementById(errorId).innerHTML = message;
+}
+
+
+// Clear an individual error
+
+function clearError(fieldId) {
+    let errorId;
+
+    switch (fieldId) {
+        case "department":
+            errorId = "departmentError";
+            break;
+
+        case "doctor":
+            errorId = "doctorError";
+            break;
+
+        case "appointment-date":
+            errorId = "dateError";
+            break;
+
+        case "appointment-time":
+            errorId = "timeError";
+            break;
+    }
+
+    document.getElementById(errorId).innerHTML = "";
+}
+
+
+// Clear all appointment form errors
+
+function clearErrors(fields) {
+    for (const field of fields) {
+        clearError(field);
     }
 }
+
+
+// Get today's date
+
+function todayString() {
+    let today = new Date();
+
+    let year = today.getFullYear();
+    let month = String(today.getMonth() + 1).padStart(2, "0");
+    let day = String(today.getDate()).padStart(2, "0");
+
+    return year + "-" + month + "-" + day;
+}
+
+
+function showSection(sectionId) {
+    document.getElementById(sectionId).scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+
+// Navigation buttons
 
 document.getElementById("nav-book-appointment").addEventListener("click", function () {
     showSection("book-appointment-section");
@@ -39,104 +124,118 @@ document.getElementById("nav-view-bills").addEventListener("click", function () 
     showSection("view-bill-section");
 });
 
+
+// CREATE: Book a new appointment
+
 function bookAppointment() {
 
     let department = document.getElementById("department").value;
     let doctor = document.getElementById("doctor").value;
     let date = document.getElementById("appointment-date").value;
     let time = document.getElementById("appointment-time").value;
-    let reason = document.getElementById("reason").value.trim();
 
     let isValid = true;
 
+    clearErrors(appointmentFields);
+
+
+    // Department validation
+
     if (department === "") {
-        alert("Please select a department.");
+        showError("department", "Please select a department.");
         isValid = false;
     }
+
+
+    // Doctor validation
 
     if (doctor === "") {
-        alert("Please select a doctor.");
+        showError("doctor", "Please select a doctor.");
         isValid = false;
     }
 
-    let today = new Date();
-    today.setHours(0, 0, 0, 0);
 
-    let appointmentDate = new Date(date);
-    appointmentDate.setHours(0, 0, 0, 0);
+    // Date validation
 
-    if (date === "" || appointmentDate < today) {
-        alert("Please select a valid appointment date.");
+    if (date === "") {
+        showError("appointment-date", "Please select an appointment date.");
+        isValid = false;
+    } else if (date < todayString()) {
+        showError("appointment-date", "Please select a valid date.");
         isValid = false;
     }
+
+
+    // Time validation
 
     if (time === "") {
-        alert("Please select an appointment time.");
+        showError("appointment-time", "Please select an appointment time.");
         isValid = false;
     }
+
+
+    // If validation fails
 
     if (isValid === false) {
         return false;
     }
 
-    // CREATE appointment object
-    let newAppointment = {
-        department: department,
-        doctor: doctor,
-        date: date,
-        time: time,
-        reason: reason,
-        status: "Pending"
-    };
 
-    appointments.push(newAppointment);
+    // Successful booking
 
-    alert("Appointment request submitted successfully!");
+    alert("Appointment booked successfully!");
 
     document.getElementById("appointment-form").reset();
-
-    renderSchedule();
 
     return false;
 }
 
 
-function renderSchedule() {
+// Submit appointment form
 
-    let table = document.querySelector("#view-schedule-section .data-table");
+document.getElementById("appointment-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    bookAppointment();
+});
 
-    let rows = "";
 
-    if (appointments.length === 0) {
 
-        rows = "<tr><td>No appointment has been booked yet.</td></tr>";
+// Load available appointment times
 
-    } else {
+function loadAppointmentTimes() {
 
-        rows = "<tr>" +
-            "<th>Department Name</th>" +
-            "<th>Doctor Name</th>" +
-            "<th>Date</th>" +
-            "<th>Time</th>" +
-            "<th>Status</th>" +
-            "</tr>";
+    let select = document.getElementById("appointment-time");
 
-        for (let i = 0; i < appointments.length; i++) {
+    for (const time of availableTimes) {
 
-            let appointment = appointments[i];
+        let option = document.createElement("option");
 
-            rows += "<tr>" +
-                "<td>" + appointment.department + "</td>" +
-                "<td>" + appointment.doctor + "</td>" +
-                "<td>" + appointment.date + "</td>" +
-                "<td>" + appointment.time + "</td>" +
-                "<td>" + appointment.status + "</td>" +
-                "</tr>";
-        }
+        option.value = time;
+        option.innerHTML = time;
+
+        select.appendChild(option);
     }
-
-    table.innerHTML = rows;
 }
+
+function clearAppointmentError(fieldId) {
+    clearError(fieldId);
+}
+
+document.getElementById("department").addEventListener("change", function () {
+    clearAppointmentError("department");
+});
+
+document.getElementById("doctor").addEventListener("change", function () {
+    clearAppointmentError("doctor");
+});
+
+document.getElementById("appointment-date").addEventListener("change", function () {
+    clearAppointmentError("appointment-date");
+});
+
+document.getElementById("appointment-time").addEventListener("change", function () {
+    clearAppointmentError("appointment-time");
+});
 
 
 function searchDoctor() {
@@ -145,128 +244,85 @@ function searchDoctor() {
 
     let doctorSelect = document.getElementById("doctor");
 
+    let doctorFound = false;
+
     if (keyword === "") {
         alert("Please enter a doctor name.");
         return;
     }
 
-    let found = false;
 
     for (let i = 0; i < doctorSelect.options.length; i++) {
 
-        let doctorName = doctorSelect.options[i].text.toLowerCase();
+        let doctorName = doctorSelect.options[i].textContent.toLowerCase();
 
         if (doctorName.includes(keyword) && doctorSelect.options[i].value !== "") {
 
-            doctorSelect.selectedIndex = i;
+            doctorSelect.value = doctorSelect.options[i].value;
 
-            showSection("book-appointment-section");
+            doctorFound = true;
 
-            found = true;
             break;
         }
     }
 
-    if (found === false) {
-        alert("Doctor not found.");
-    }
-}
 
+    if (doctorFound === true) {
 
-function viewProfile() {
+        clearError("doctor");
 
-    let profileSection = document.getElementById("profile-section");
+        showSection("book-appointment-section");
 
-    if (profileSection) {
-
-        profileSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        alert("Doctor found successfully.");
 
     } else {
 
-        alert("Profile section has not been added yet.");
+        alert("No doctor found with this name.");
+
     }
 }
 
 
-function downloadPrescription() {
+document.getElementById("search-btn").addEventListener("click", function () {
+    searchDoctor();
+});
 
-    alert("No prescription is available to download.");
+function viewProfile() {
+
+    alert("Patient profile will be available soon.");
+
 }
 
-function downloadReport() {
 
-    alert("No test report is available to download.");
-}
+document.getElementById("profile-pic").addEventListener("click", function () {
+    viewProfile();
+});
+
 
 function payBill() {
 
     let paymentMethod = document.getElementById("payment").value;
 
-    if (paymentMethod === "" || paymentMethod === "Select") {
+    if (paymentMethod === "") {
 
         alert("Please select a payment method.");
+
+        return false;
+
+    } else {
+
+        alert("Payment feature will be available soon.");
+
         return false;
     }
-
-    alert("Payment processing requires the PHP backend.");
-
 }
 
-
-document.getElementById("appointment-form").addEventListener("submit", function (event) {
-
-    event.preventDefault();
-
-    bookAppointment();
-
-});
-
-
-document.getElementById("search-btn").addEventListener("click", function () {
-
-    searchDoctor();
-
-});
-
-document.getElementById("search-input").addEventListener("keydown", function (event) {
-
-    if (event.key === "Enter") {
-
-        event.preventDefault();
-
-        searchDoctor();
-
-    }
-
-});
-
-
-document.getElementById("profile-pic").addEventListener("click", function () {
-
-    viewProfile();
-
-});
-
-
-document.querySelector("#prescription-section .download-btn").addEventListener("click", function () {
-
-    downloadPrescription();
-
-});
-
-document.querySelector("#test-report-section .download-btn").addEventListener("click", function () {
-
-    downloadReport();
-
-});
-
 document.querySelector(".payment-btn").addEventListener("click", function () {
-
     payBill();
-
 });
 
-renderSchedule();
+
+document.getElementById("appointment-date").min = todayString();
+
+
+loadAppointmentTimes();
