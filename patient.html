@@ -30,30 +30,45 @@
       </div>
     <div>
     </header>
-    <img id="main-img" src="/images/patientPhoto.jpg" alt="patient photo">
+    <img id="main-img" src="images/patientPhoto.jpg" alt="patient photo">
     <main id ="patient-main-content">
         <section id ="book-appointment-section">
             <h2 class="page-title" id="book-appointment-title">Book Appointment</h2>
-            <form method="post">
+            <form method="post" id="appointment-form">
                 <fieldset>
                     <legend>Appointment Details</legend>
                     <label for="department">Select Department:</label>
-                    <select id="department" name="department" required>
+                    <select id="department" name="department">
                         <option value="">Select Department</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="neurology">Neurology</option>
+                         <option value="orthopendics">Orthopendics</option>
+                          <option value="generalMedicine">GeneralMedicine
+                         </option>
+                         <option value="generalSurgery">General Surgery</option>
                     </select>
+                    <span class="error" id="departmentError"></span>
                     <label for="doctor">Select Doctor:</label>
-                    <select id="doctor" name="doctor" required>
+                    <select id="doctor" name="doctor">
                         <option value="">Select Doctor</option>
-                    </select>
+                        <option value="drRobin">Dr Robin Uddin</option>
+                        <option value="drShafi">Dr Shafi</option>
+                        <option value="drHamid">Dr Hamid</option>
+                   </select>
+                   <span class="error" id="doctorError"></span>
                     <label for="appointment-date">Select Date:</label>
-                    <input type="date" id="appointment-date" name="appointment-date" required>
-
+                    <input type="date" id="appointment-date" name="appointment-date">
+                    <span class="error" id="dateError"></span>
                      <label for="appointment-time">Select Time:</label>
-                     <select id="appointment-time" name="appointment-time" required>
+                     <select id="appointment-time" name="appointment-time">
                         <option value="">Select Time</option>
+                        <option value="2pm">2:00pm</option>
+                        <option value="4pm">4:00pm</option>
+                        <option value="6pm">6:00pm</option>
                         </select>
+                    <span class="error" id="timeError"></span>
                     <label for="reason">Reason for Appointment:</label>
-                    <textarea id="reason" name="reason" rows="04 rows"></textarea>
+                    <textarea id="reason" name="reason" rows="4"></textarea>
                     <br>
                     <button class="submit-button"   type="submit" >Book Appointment</button>
                 </fieldset>
@@ -157,6 +172,9 @@
             <label for="payment">Payment Method</label>
             <select id="payment" name="payment-method">
                 <option>Select</option>
+                <option value="cash">Cash</option>
+                <option value="card">Card</option>
+                <option value="mobileBanking">Mobile Banking</option>
             </select>
             <button class="payment-btn">Pay Bill</button>
         </section>
