@@ -225,10 +225,31 @@ body {
   background-color: rgb(85, 159, 85);
 }
 
-html{
-  scroll-behavior: smooth;
-}
 
 section{
   scroll-margin-top: 20px;
 }
+.error {
+    display: block;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin: -5px 0 10px 7px;
+}
+
+ 
+ 
+ 
+  
+   
+  
+  
+   
+
+ 
+   
+ 
+
+ 
+   
+  
